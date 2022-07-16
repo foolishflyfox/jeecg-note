@@ -7,6 +7,7 @@
     <modules>
         <module>sell-service</module>
         <module>stock-service</module>
+        <module>config-service</module>
     </modules>
 
     <properties>

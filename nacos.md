@@ -260,4 +260,75 @@ feignSell call stock-service result: 无参数调用: simpleStock%
 
 ## nacos 的配置中心功能
 
+### nacos 管理界面--配置列表
+
+配置管理维护了配置中心所有的配置文件，我们就可以在微服务中引用配置中心的配置了。
+
+#### 新建配置
+
+配置的相关文档查看: https://nacos.io/zh-cn/docs/concepts.html 。
+
+- Data ID: Data ID 通常采用类 Java 包（如 com.taobao.tc.refund.log.level）的命名规则保证全局唯一性。此命名规则非强制。例如：com.bfh.sell 表示与销售相关的配置。
+- Group: 在 namespace 的基础上再进行归类，通常 namespace 按环境进行归类，Group 按项目进行归类。
+
+设置配置信息存放在 mysql 中，需要修改 *conf/application.properties* 文件中关于 mysql 的内容。
+
+要进行权限控制，需要配置 *application.properties* 的 `nacos.core.auth.enabled` 项为 true。
+
+在 public 的 namespace 下新建 Data id 为 `config-service` 的配置项，类型为 properties：
+```properties
+user.name=fhb
+user.age=13
+```
+
+### nacos 配置编程
+
+#### 引入依赖
+
+要使用 nacos 的配置功能，需要引入依赖:
+```xml
+<dependency>
+    <groupId>com.alibaba.cloud</groupId>
+    <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+</dependency>
+```
+
+#### 添加配置文件 bootstrap.yaml
+
+bootstrap.yaml 内容如下：
+```yaml
+spring:
+  application:
+    name: config-service
+  cloud:
+    nacos:
+      server-addr: localhost:8848
+      username: nacos
+      password: nacos
+      config:
+        namespace: public
+        # file-extension: yaml # 默认为 properties
+server:
+  port: 8802
+```
+
+#### 读取配置
+
+```java
+@SpringBootApplication
+@EnableFeignClients
+public class ConfigServiceMain {
+
+    public static void main(String[] args) {
+        ConfigurableApplicationContext ctx = SpringApplication.run(ConfigServiceMain.class, args);
+        String username = ctx.getEnvironment().getProperty("user.name");
+        String age = ctx.getEnvironment().getProperty("user.age");
+        System.out.println("username = " + username + ", age = " + age);
+    }
+}
+```
+
+
+#### 获取配置
+
 

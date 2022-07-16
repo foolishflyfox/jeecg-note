@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: config-service
+  cloud:
+    nacos:
+      server-addr: localhost:8848
+      username: nacos
+      password: nacos
+      config:
+        namespace: dev
+        file-extension: yaml
+        group: xyz
+        shared-configs:
+          - data-id: com.bfh.common.properties  # 优先级最次
+            refresh: true
+          - data-id: com.bfh.common2.yaml  # 优先级次之
+            refresh: false
+            group: xyz
+        extension-configs[0]:  # 优先级最高
+          data-id: com.bfh.common3.yaml
+          refresh: true
+
