@@ -1,0 +1,8 @@
+server:
+  port: 8810
+spring:
+  application:
+    name: order-gateway-service
+  cloud:
+    nacos:
+      server-addr: localhost:8848

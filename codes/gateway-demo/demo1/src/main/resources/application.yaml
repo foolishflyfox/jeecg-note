@@ -1,0 +1,29 @@
+server:
+  port: 8809
+spring:
+  application:
+    name: gateway-demo1
+  cloud:
+    gateway:
+      routes: # 配置网关路由规则
+        - id: order_route # 路由的唯一标识
+#          uri: http://localhost:8810 # 需要转发的地址
+          uri: lb://order-gateway-service
+          # 配置断言规则，用于路由规则的匹配
+          predicates:
+            # Path 是内置的断言工厂
+            - Path=/order-serv/**
+          filters:
+            - StripPrefix=1  # 转发之前去掉第一层的路径
+        - id: stock_route
+#          uri: http://localhost:8811
+          uri: lb://stock-gateway-service
+          predicates:
+            - Path=/stock-serv/**
+          filters:
+            - StripPrefix=1
+      discovery:
+        locator:
+          enabled: true # http://localhost:8809/stock-gateway-service/stock/test
+    nacos:
+      server-addr: localhost:8848
