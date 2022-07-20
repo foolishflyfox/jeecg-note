@@ -18,14 +18,14 @@ import java.util.Set;
  * 鉴权：控制用户对系统资源的访问进行控制。后台接口访问，前台页面元素，敏感数据。
  * RBAC：Role Based Access Control
  */
-public class MyRealm1 extends AuthorizingRealm {
+public class MyRealmA extends AuthorizingRealm {
 
     /*
      * 模拟数据库数据
      */
     Map<String, String> userMap = new HashMap<>(16);
 
-    public MyRealm1() {
+    public MyRealmA() {
         userMap.put("foo", "000");
         super.setName("MyRealm1");
     }

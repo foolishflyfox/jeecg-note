@@ -19,4 +19,5 @@ spring:
         extension-configs[0]:  # 优先级最高
           data-id: com.bfh.common3.yaml
           refresh: true
+        prefix: abc  # 默认是使用 spring.application.name，例如 config-service-pro.yaml，修改后变为 abc-pro.yaml
 

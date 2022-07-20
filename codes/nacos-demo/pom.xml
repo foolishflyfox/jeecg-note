@@ -8,6 +8,9 @@
         <module>sell-service</module>
         <module>stock-service</module>
         <module>config-service</module>
+        <module>nacos-config-service-object</module>
+        <module>test-scan</module>
+        <module>nacos-object-config</module>
     </modules>
 
     <properties>

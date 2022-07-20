@@ -1,4 +1,4 @@
-package com.ttt;
+package com.bfh;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;

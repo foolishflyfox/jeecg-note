@@ -1,0 +1,6 @@
+user:
+  name: xxxxxx
+  sex: man
+spring:
+  profiles:
+    active: pro
