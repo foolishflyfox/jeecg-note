@@ -6,6 +6,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>annotation-demo</module>
+        <module>jwt-shiro</module>
+        <module>controller-advice-demo</module>
     </modules>
 
     <properties>
